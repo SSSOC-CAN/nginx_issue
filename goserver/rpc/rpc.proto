@@ -1,0 +1,24 @@
+syntax="proto3";
+
+package rpc;
+
+option go_package = "github.com/SSSOC-CAN/nginx_issue/goserver/rpc";
+
+service RpcService {
+    rpc SubscribeDataStream(SubscribeDataRequest) returns (stream RealTimeData);
+}
+
+message SubscribeDataRequest {
+}
+
+message DataField {
+    string name = 1;
+    double value = 2;
+}
+
+message RealTimeData {
+    string source = 1;
+    bool is_scanning = 2;
+    int64 timestamp = 3;
+    map<int64, DataField> data = 4;
+}
